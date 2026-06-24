@@ -1,0 +1,7 @@
+# Local tooling — the build scripts are not part of the deployed static site.
+*.py
+__pycache__/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qwen OCR — change review</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="topbar">
+    <div class="brand">Qwen OCR · change review</div>
+    <div class="nav">
+      <button id="prevBtn" title="Previous (↑ / k)">‹ Prev</button>
+      <span id="position">–</span>
+      <button id="nextBtn" title="Next (↓ / j)">Next ›</button>
+    </div>
+    <div id="docTitle" class="doc-title">Select a document</div>
+    <div id="statbar" class="statbar"></div>
+  </header>
+
+  <main id="layout">
+    <!-- Sidebar: document list -->
+    <aside id="sidebar">
+      <div class="filterbox">
+        <input id="filter" type="search" placeholder="Filter documents…" autocomplete="off">
+        <label class="sortrow">
+          <span>Sort</span>
+          <select id="sortSel">
+            <option value="changed">Most changed first</option>
+            <option value="least">Least changed first</option>
+            <option value="name">Name</option>
+          </select>
+        </label>
+        <label class="chk"><input type="checkbox" id="onlyChanged"> only changed</label>
+      </div>
+      <ul id="doclist"></ul>
+    </aside>
+
+    <!-- Image pane -->
+    <section id="imgpane">
+      <div class="pane-head">
+        <span>Source image</span>
+        <div class="zoomctl">
+          <button id="zoomOut">−</button>
+          <input id="zoom" type="range" min="20" max="400" value="100">
+          <button id="zoomIn">+</button>
+          <button id="zoomFit" title="Fit width">Fit</button>
+          <a id="openImg" target="_blank" rel="noopener">open ↗</a>
+        </div>
+      </div>
+      <div id="imgscroll" class="imgscroll">
+        <img id="docImg" alt="source scan">
+      </div>
+    </section>
+
+    <!-- Diff pane -->
+    <section id="diffpane">
+      <div class="pane-head tabs">
+        <button class="tab active" data-tab="inline">Inline changes</button>
+        <button class="tab" data-tab="list">Change list</button>
+        <button class="tab" data-tab="orig">Original</button>
+        <button class="tab" data-tab="model">Model output</button>
+      </div>
+      <div id="tab-inline" class="tabpane active">
+        <p class="hint">Content-level diff (whitespace, line breaks and Markdown
+          formatting ignored). <span class="del-chip">removed</span>
+          <span class="ins-chip">added</span></p>
+        <div id="inlineDiff" class="cjk diffbody"></div>
+      </div>
+      <div id="tab-list" class="tabpane">
+        <div id="changeList"></div>
+      </div>
+      <div id="tab-orig" class="tabpane">
+        <pre id="origText" class="cjk raw"></pre>
+      </div>
+      <div id="tab-model" class="tabpane">
+        <pre id="modelText" class="cjk raw"></pre>
+      </div>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
